@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Club & Event Management System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="#home" class="logo">Campus<span>Hub</span></a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#clubs" class="nav-link active">Clubs Directory</a>
+        <a href="#events" class="nav-link">Events Calendar</a>
+        <a href="#register" class="nav-link">Membership Signup</a>
+        <button class="btn-outline" id="viewMyActivityBtn">My Registrations (<span id="regCount">0</span>)</button>
+      </nav>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">&#9776;</button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="container">
+      <h1>Discover Campus Clubs & Upcoming Workshops</h1>
+      <p>Your centralized portal to explore Technical, Cultural, Literary, and Sports clubs, register for workshops, and apply for club membership.</p>
+      <div class="hero-actions">
+        <a href="#clubs" class="btn-primary">Explore Clubs</a>
+        <a href="#register" class="btn-secondary">Join a Club</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Requirement 1: Club Showcase Directory -->
+  <section id="clubs" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Club Showcase Directory</h2>
+        <p>Browse student organizations by category and click on any club to view details, leads, and workshops.</p>
+      </div>
+
+      <div class="controls-bar">
+        <div class="category-tabs" id="categoryTabs">
+          <button class="tab-btn active" data-category="All">All Clubs</button>
+          <button class="tab-btn" data-category="Technical">Technical</button>
+          <button class="tab-btn" data-category="Cultural">Cultural</button>
+          <button class="tab-btn" data-category="Literary">Literary</button>
+          <button class="tab-btn" data-category="Sports">Sports</button>
+        </div>
+        <div class="search-box">
+          <input type="text" id="clubSearchInput" placeholder="Search clubs by name or keyword..." />
+        </div>
+      </div>
+
+      <div class="clubs-grid" id="clubsGrid"></div>
+    </div>
+  </section>
+
+  <!-- Requirement 4: Upcoming Club Events Calendar -->
+  <section id="events" class="section bg-subtle">
+    <div class="container">
+      <div class="section-header">
+        <h2>Upcoming Club Events Calendar</h2>
+        <p>Stay updated on active workshops and competitions across all campus clubs.</p>
+      </div>
+
+      <div class="calendar-controls">
+        <select id="eventCategoryFilter">
+          <option value="All">All Categories</option>
+          <option value="Technical">Technical</option>
+          <option value="Cultural">Cultural</option>
+          <option value="Literary">Literary</option>
+          <option value="Sports">Sports</option>
+        </select>
+      </div>
+
+      <div class="calendar-list" id="calendarList"></div>
+    </div>
+  </section>
+
+  <!-- Requirement 3: Online Membership Registration Form -->
+  <section id="register" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Online Membership Registration</h2>
+        <p>Sign up to become an official member of your favorite college clubs.</p>
+      </div>
+
+      <div class="form-wrapper">
+        <form id="membershipForm" novalidate>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="fullName">Full Name <span class="required">*</span></label>
+              <input type="text" id="fullName" placeholder="e.g., Aarav Sharma" />
+              <small class="error-msg" id="nameError"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="studentId">Student ID / Roll Number <span class="required">*</span></label>
+              <input type="text" id="studentId" placeholder="e.g., CS2026-104" />
+              <small class="error-msg" id="idError"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="email">College Email Address <span class="required">*</span></label>
+              <input type="email" id="email" placeholder="e.g., aarav@college.edu" />
+              <small class="error-msg" id="emailError"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="yearSelect">Year of Study <span class="required">*</span></label>
+              <select id="yearSelect">
+                <option value="">-- Select Year --</option>
+                <option value="1st Year">1st Year</option>
+                <option value="2nd Year">2nd Year</option>
+                <option value="3rd Year">3rd Year</option>
+                <option value="4th Year">4th Year</option>
+              </select>
+              <small class="error-msg" id="yearError"></small>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="primaryClub">Select Primary Club to Join <span class="required">*</span></label>
+              <select id="primaryClub">
+                <option value="">-- Choose a Club --</option>
+              </select>
+              <small class="error-msg" id="clubError"></small>
+            </div>
+
+            <!-- Interest Checkbox Selections -->
+            <div class="form-group full-width">
+              <label>Areas of Interest (Select at least one) <span class="required">*</span></label>
+              <div class="checkbox-grid">
+                <label class="checkbox-item">
+                  <input type="checkbox" name="interest" value="Web & App Development" /> Web & App Development
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="interest" value="Robotics & IoT" /> Robotics & IoT
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="interest" value="Drama & Theatre" /> Drama & Theatre
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="interest" value="Music & Bands" /> Music & Bands
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="interest" value="Debate & Creative Writing" /> Debate & Creative Writing
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="interest" value="Athletics & Team Sports" /> Athletics & Team Sports
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="interest" value="Event Management" /> Event Management
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="interest" value="Design & Media" /> Design & Media
+                </label>
+              </div>
+              <small class="error-msg" id="interestError"></small>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="motivation">Why do you want to join? (Minimum 15 characters) <span class="required">*</span></label>
+              <textarea id="motivation" rows="3" placeholder="Tell us briefly about your skills or enthusiasm..."></textarea>
+              <small class="error-msg" id="motivationError"></small>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary submit-btn">Submit Membership Application</button>
+          <div class="form-success" id="formSuccessMsg"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Requirement 2: Club Detail Modal -->
+  <div class="modal-overlay" id="clubDetailModal">
+    <div class="modal-card">
+      <button class="modal-close" id="closeClubModal" aria-label="Close">&times;</button>
+      <div id="clubDetailContent"></div>
+    </div>
+  </div>
+
+  <!-- Workshop Quick Registration Modal -->
+  <div class="modal-overlay" id="workshopModal">
+    <div class="modal-card modal-small">
+      <button class="modal-close" id="closeWorkshopModal" aria-label="Close">&times;</button>
+      <h3 id="workshopModalTitle">Register for Workshop</h3>
+      <p id="workshopModalMeta" style="color: var(--text-muted); font-size: 0.88rem; margin: 0.25rem 0 1rem;"></p>
+      <form id="workshopRegForm" novalidate>
+        <input type="hidden" id="workshopIdInput" />
+        <div class="form-group" style="margin-bottom: 0.85rem;">
+          <label for="wsStudentName">Your Name <span class="required">*</span></label>
+          <input type="text" id="wsStudentName" placeholder="Enter your full name" required />
+          <small class="error-msg" id="wsNameError"></small>
+        </div>
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label for="wsStudentEmail">College Email <span class="required">*</span></label>
+          <input type="email" id="wsStudentEmail" placeholder="name@college.edu" required />
+          <small class="error-msg" id="wsEmailError"></small>
+        </div>
+        <button type="submit" class="btn-primary" style="width: 100%;">Confirm Workshop Seat</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Saved Registrations Modal -->
+  <div class="modal-overlay" id="activityModal">
+    <div class="modal-card">
+      <button class="modal-close" id="closeActivityModal" aria-label="Close">&times;</button>
+      <h3>My Saved Registrations</h3>
+      <div id="activityContent"></div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 CampusHub — Student Club & Event Management System. Frontend Web Project.</p>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
